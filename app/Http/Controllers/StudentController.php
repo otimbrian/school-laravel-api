@@ -31,7 +31,7 @@ class StudentController extends Controller
 
         $student = Student::findOrFail($studentId);
         $student->update($validatedData);
-
+        
         return response() -> json(['message' => 'Update Succesful'], 200);
     }
 
