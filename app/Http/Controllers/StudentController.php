@@ -19,4 +19,29 @@ class StudentController extends Controller
         $student = Student::create($request -> all());
         return response() -> json($student, 201);
     }
+
+    // Implementing an Update on the student.
+    public function update(Request $request, $studentId){
+        $validatedData = $request -> validate([
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'age' => 'string|required',
+            'class' => 'string|required'
+        ]);
+
+        $student = Student::findOrFail($studentId);
+        $student->update($validatedData);
+
+        return response() -> json(['message' => 'Update Succesful'], 200);
+    }
+
+    // Implementing the delete.
+    public function destroy($studentId){
+        // Finding the student by ID.
+
+        $student = Student::findOrFail($studentId);
+        $student->delete();
+
+        return response() -> json(204);
+    }
 }
