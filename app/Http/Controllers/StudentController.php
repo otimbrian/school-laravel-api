@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
 {
@@ -16,6 +17,16 @@ class StudentController extends Controller
 
     // Create a new student.
     public function store(Request $request){
+        // Log::info('Received student', json_encode($request));
+         // Log::info('Received student', json_encode($request));
+         
+        //  $validatedData = $request -> validate([
+        //     'first_name' => 'string|required',
+        //     'last_name' => 'string|required',
+        //     'age' => 'string|required',
+        //     'class' => 'string|required'
+        // ]);
+        
         $student = Student::create($request -> all());
         return response() -> json($student, 201);
     }
